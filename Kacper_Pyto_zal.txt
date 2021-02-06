@@ -1,0 +1,29 @@
+zad 2. 
+SELECT `contactFirstName`, `contactLastName`, count(orderNumber) as liczba from customers 
+inner join orders on customers.customerNumber=orders.customerNumber 
+group by customers.customerNumber order by liczba desc
+
+zad.4 
+	A
+		select year(orderDate),count(orderDate) as liczba, productNAME from products
+		join orderdetails on products.productCode = orderdetails.productCode
+		join orders on orderdetails.orderNumber = orders.orderNumber
+		where productName = "1952 Alpine Renault 1300" or productName = "1968 Ford Mustang" or productName = "1996 Moto Guzzi 1100i"
+		group by productNAME, year(orderDate)
+	B
+		select 
+		year(orderDate), 
+		month(orderDate),
+		sum(quantityordered*priceeach) as suma
+		from orderdetails
+		join products on orderdetails.productCode = products.productCode
+		join orders on orderdetails.orderNumber = orders.orderNumber
+		where productName like "%Harley%"
+		group by year(orderDate), month(orderDate)
+		order by year(orderDate)
+	C	
+		select productline, count(productcode) as liczba 
+		from products group by productline 
+		having count(productcode) > 10 and count(productcode) <= 20
+
+GIT:https://github.com/kacperpyto/Poprawa
